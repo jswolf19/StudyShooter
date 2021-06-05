@@ -6,3 +6,8 @@ interface Size {
     readonly width: number;
     readonly height: number;
 }
+
+interface Point {
+    readonly x: number;
+    readonly y: number;
+}

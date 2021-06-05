@@ -3,6 +3,9 @@
 [シューティングゲーム作成(JavaScript)](https://www.youtube.com/playlist?list=PLa3BDwShqOrT0NPZ16UxY-w_NJ4erbSbV)に参考しながら、
 TypeScriptでシューティングゲームを作成する。
 
+## 一覧
+- [Video1](https://github.com/jswolf19/StudyShooter/releases/tag/Video1) 環境構築、背景の表示: [シューティングゲーム作成(1)](https://www.youtube.com/watch?v=ZQYgH_JTyKU&list=PLa3BDwShqOrT0NPZ16UxY-w_NJ4erbSbV) (`Star.update`がまだ使用されていないため、一時的に省略)
+
 ## 開発環境
 npm/node v6.4.1/10.15.3
 

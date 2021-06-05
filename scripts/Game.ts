@@ -40,6 +40,8 @@ class Game {
     }
 
     private gameLoop(): void {
+        this._stars.forEach((s) => s.update(this));
+
         this.draw();
     }
 

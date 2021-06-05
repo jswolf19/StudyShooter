@@ -1,6 +1,13 @@
 class Star {
     private _location: ScaledPoint;
     private _speed: ScaledVector;
+
+    private get size(): Size {
+        return {
+            width: this._size,
+            height: this._size
+        };
+    }
     private _size: number;
 
     constructor(game: Game) {
@@ -14,10 +21,14 @@ class Star {
         }
         this._size = rand(1, 2);
     }
+
+    public isVisible(game: Game): boolean {
+        return game.isVisible(this._location, this.size);
+    }
     
     public draw(ctx: CanvasRenderingContext2D): void {
         ctx.fillStyle = rand(0, 2) !== 0 ? "#66f" : "#8af";
-        ctx.fillRect(this._location.x, this._location.y, this._size, this._size);
+        ctx.fillRect(this._location.x, this._location.y, this.size.width, this.size.height);
     }
 
     public update(game: Game): void {

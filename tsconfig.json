@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "module": "None",
+        "target": "es5",
+        "sourceMap": true,
+        "allowJs": true,
+        "noEmitOnError": true,
+        "rootDir": "scripts",
+        "outDir": "wwwroot/scripts"
+    },
+    "include": ["scripts/**/*"]
+}

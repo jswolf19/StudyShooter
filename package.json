@@ -1,0 +1,13 @@
+{
+  "name": "studyshooter",
+  "version": "1.0.0",
+  "description": "勉強会シューター",
+  "main": "index.html",
+  "scripts": {
+    "build": "tsc",
+    "develop": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.2"
+  }
+}

@@ -19,6 +19,7 @@ class Game {
         };
     }
     
+    private readonly _sprites: SpriteLoader;
     private readonly _ctx: CanvasRenderingContext2D;
 
     private readonly _vcanvas: HTMLCanvasElement;
@@ -27,7 +28,9 @@ class Game {
 
     private readonly _stars: Array<Star>;
 
-    public constructor(canvas: HTMLCanvasElement) {
+    public constructor(canvas: HTMLCanvasElement, sprites: SpriteLoader) {
+        this._sprites = sprites;
+
         this._ctx = canvas.getContext("2d");
         this.SCREEN_SIZE = {
             width: canvas.width / Game.ZOOM_FACTOR,
@@ -51,7 +54,13 @@ class Game {
             this._stars[i] = new Star(this);
         }
 
-        this._loopHandle = setInterval(() => this.gameLoop(), Game.GAME_SPEED);
+        this._sprites.registerLoadHandler(() => this.startInternal());
+    }
+
+    private startInternal(): void {
+        if(this._loopHandle === null && this._sprites.Loaded) {
+            this._loopHandle = setInterval(() => this.gameLoop(), Game.GAME_SPEED);
+        }
     }
 
     public isVisible(location: ScaledPoint, size: Size = { width: 0, height: 0 }): boolean {

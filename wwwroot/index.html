@@ -4,11 +4,13 @@
         <meta charset="utf-8"/>
         <title>勉強会シューター</title>
         <script src="scripts/utils.js"></script>
+        <script src="scripts/graphics/SpriteLoader.js"></script>
         <script src="scripts/graphics/Star.js"></script>
         <script src="scripts/Game.js"></script>
         <script>
             function init() {
-                var game = new Game(document.getElementById("gameCanvas"));
+                var sprites = new SpriteLoader("assets/sprites.png");
+                var game = new Game(document.getElementById("gameCanvas"), sprites);
                 game.start();
             }
         </script>

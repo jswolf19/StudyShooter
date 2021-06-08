@@ -17,6 +17,10 @@ class SpriteLoader {
         this._sprites.src = url;
     }
 
+    public getSprite(rect: Rectangle): Sprite {
+        return new Sprite(this._sprites, rect);
+    }
+
     public registerLoadHandler(handler: (this: GlobalEventHandlers, ev: Event) => void): void {
         if(this.Error !== null) {
             throw this.Error;

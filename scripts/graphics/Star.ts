@@ -2,11 +2,11 @@ class Star {
     private _location: ScaledPoint;
     private _speed: ScaledVector;
 
-    private get size(): Size {
-        return {
+    private get bounds(): Rectangle {
+        return new Rectangle(this._location, {
             width: this._size,
             height: this._size
-        };
+        });
     }
     private _size: number;
 
@@ -23,12 +23,13 @@ class Star {
     }
 
     public isVisible(game: Game): boolean {
-        return game.isVisible(this._location, this.size);
+        return game.isVisible(this.bounds);
     }
     
     public draw(ctx: CanvasRenderingContext2D): void {
+        let bounds = this.bounds;
         ctx.fillStyle = rand(0, 2) !== 0 ? "#66f" : "#8af";
-        ctx.fillRect(this._location.x, this._location.y, this.size.width, this.size.height);
+        ctx.fillRect(bounds.left, bounds.top, bounds.width, bounds.height);
     }
 
     public update(game: Game): void {

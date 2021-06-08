@@ -7,7 +7,46 @@ interface Size {
     readonly height: number;
 }
 
-class ScaledPoint {
+interface Point {
+    readonly x: number;
+    readonly y: number;
+}
+
+class Rectangle {
+    public get left(): number {
+        return this._location.x;
+    }
+
+    public get top(): number {
+        return this._location.y;
+    }
+
+    public get right(): number {
+        return this.left + this.width;
+    }
+
+    public get bottom(): number {
+        return this.top + this.height;
+    }
+
+    public get width(): number {
+        return this._size.width;
+    }
+
+    public get height(): number {
+        return this._size.height;
+    }
+
+    private readonly _location: Point;
+    private readonly _size: Size;
+    
+    public constructor(location: Point, size: Size) {
+        this._location = location;
+        this._size = size;
+    }
+}
+
+class ScaledPoint implements Point {
     get x(): number {
         return this._x.valueOf();
     }

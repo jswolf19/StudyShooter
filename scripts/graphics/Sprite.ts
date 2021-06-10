@@ -1,15 +1,23 @@
 class Sprite {
-    public readonly bounds: Rectangle;
+    private readonly _bounds: Rectangle;
 
     private readonly _image: HTMLImageElement;
 
     public constructor(image: HTMLImageElement, bounds: Rectangle) {
         this._image = image;
-        this.bounds = bounds;
+        this._bounds = bounds;
+    }
+
+    public getBoundsCenteredAt(location: Point): Rectangle {
+        return new Rectangle({
+                x: location.x - (this._bounds.width/2),
+                y: location.y - (this._bounds.height/2)
+            }, this._bounds as Size);        
     }
 
     public draw(ctx: CanvasDrawImage, location: Point): void {
-        ctx.drawImage(this._image, this.bounds.left, this.bounds.top, this.bounds.width, this.bounds.height,
-                      location.x - (this.bounds.width/2), location.y - (this.bounds.height/2), this.bounds.width, this.bounds.height);
+        let target: Rectangle = this.getBoundsCenteredAt(location);
+        ctx.drawImage(this._image, this._bounds.left, this._bounds.top, this._bounds.width, this._bounds.height,
+                      target.left, target.top, target.width, target.height);
     }
 }

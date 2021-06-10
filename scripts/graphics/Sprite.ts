@@ -9,10 +9,22 @@ class Sprite {
     }
 
     public getBoundsCenteredAt(location: Point): Rectangle {
-        return new Rectangle({
+        let topLeft: Point;
+        if(Sprite.isScaledPoint(location)) {
+            topLeft = location.offset({
+                x: new ScaledNumber(this._bounds.width, 1),
+                y: new ScaledNumber(this._bounds.height, 1)
+            });
+        } else {
+            topLeft = {
                 x: location.x - (this._bounds.width/2),
                 y: location.y - (this._bounds.height/2)
-            }, this._bounds as Size);        
+            };
+        }
+        return new Rectangle(topLeft, this._bounds as Size);        
+    }
+    private static isScaledPoint(obj: Point): obj is ScaledPoint {
+        return typeof (obj as ScaledPoint).offset !== "undefined";
     }
 
     public draw(ctx: CanvasDrawImage, location: Point): void {

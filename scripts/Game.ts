@@ -14,7 +14,9 @@ class Game {
             height: this._vcanvas.height
         };
     }
-    
+
+    public readonly keyboardInput: KeyboardInput;
+
     private readonly _sprites: SpriteLoader;
     private readonly _ctx: CanvasRenderingContext2D;
 
@@ -30,6 +32,7 @@ class Game {
 
     public constructor(canvas: HTMLCanvasElement, sprites: SpriteLoader) {
         this._sprites = sprites;
+        this.keyboardInput = new KeyboardInput();
 
         this._ctx = canvas.getContext("2d");
         this._screenSize = {
@@ -58,6 +61,8 @@ class Game {
         for (let i = 0; i < Game.STAR_CNT; i++) {
             this._stars[i] = new Star(this);
         }
+
+        this.keyboardInput.register(document);
 
         this._sprites.registerLoadHandler(() => this.startInternal());
     }

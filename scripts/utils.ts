@@ -13,6 +13,10 @@ interface Point {
 }
 
 class Rectangle {
+    public static from(topLeft: Point, bottomRight: Point) {
+        return new Rectangle(topLeft, {width: bottomRight.x - topLeft.x + 1, height: bottomRight.y - topLeft.y + 1});
+    }
+
     public get left(): number {
         return this._location.x;
     }

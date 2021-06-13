@@ -12,8 +12,8 @@ class Sprite {
         let topLeft: Point;
         if(Sprite.isScaledPoint(location)) {
             topLeft = location.offset({
-                x: new ScaledNumber(this._bounds.width, 1),
-                y: new ScaledNumber(this._bounds.height, 1)
+                x: new ScaledNumber(-this._bounds.width, 1),
+                y: new ScaledNumber(-this._bounds.height, 1)
             });
         } else {
             topLeft = {

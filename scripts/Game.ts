@@ -22,6 +22,9 @@ class Game {
     private readonly _vctx: CanvasRenderingContext2D;
     private _loopHandle: number;
 
+    private get drawables(): Array<Drawable> {
+        return this._stars;
+    }
     private readonly _stars: Array<Star>;
 
     public constructor(canvas: HTMLCanvasElement, sprites: SpriteLoader) {
@@ -75,7 +78,7 @@ class Game {
     private gameLoop(): void {
         let screenBounds = this.screenBounds;
  
-        this._stars.forEach((star) => star.update(this));
+        this.drawables.forEach((d) => d.update(this));
 
         this.draw(this._vctx);
 
@@ -91,7 +94,7 @@ class Game {
 
         ctx.fillStyle = "black";
         ctx.fillRect(screenBounds.left, screenBounds.top, screenBounds.width, screenBounds.height);
-        this._stars.filter((star) => star.isVisible(this))
-                   .forEach((star) => star.draw(ctx));
+        this.drawables.filter((d) => d.isVisible(this))
+                      .forEach((d) => d.draw(ctx));
     }
 }

@@ -1,4 +1,4 @@
-class Star {
+class Star implements Drawable {
     private _location: ScaledPoint;
     private _speed: ScaledVector;
 

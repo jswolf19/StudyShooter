@@ -116,6 +116,10 @@ class ScaledNumber {
         }
     }
 
+    public negate(): ScaledNumber {
+        return new ScaledNumber(-this.scaledValue, this._shift);
+    }
+
     public valueOf(): number {
         return this.scaledValue >> this._shift;
     }

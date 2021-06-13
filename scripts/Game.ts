@@ -23,9 +23,10 @@ class Game {
     private _loopHandle: number;
 
     private get drawables(): Array<Drawable> {
-        return this._stars;
+        return (this._stars as Array<Drawable>).concat(this._player);
     }
     private readonly _stars: Array<Star>;
+    private readonly _player: Player;
 
     public constructor(canvas: HTMLCanvasElement, sprites: SpriteLoader) {
         this._sprites = sprites;
@@ -37,6 +38,11 @@ class Game {
         };
         this._stars = new Array<Star>(Game.STAR_CNT);
         this._loopHandle = null;
+
+        this._player = new Player(new ScaledPoint(
+            ScaledNumber.from(this.screenBounds.width/2),
+            ScaledNumber.from(this.screenBounds.height/2)
+        ), this._sprites);
 
         this._vcanvas = document.createElement("canvas");
         this._vcanvas.width = this._screenSize.width * 2;

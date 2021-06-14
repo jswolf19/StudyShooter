@@ -1,4 +1,7 @@
 class Player implements Drawable {
+    public get location(): Point {
+        return this._location;
+    }
     private _location: ScaledPoint;
     private _maxSpeed: ScaledNumber;
 
@@ -75,13 +78,20 @@ class Player implements Drawable {
             this.shiftSpriteIndex("center");
         }
 
+        if(newLocation.x >= 0 && newLocation.x < game.FIELD_SIZE.width) {
+            this._location = newLocation;
+        } else {
+            newLocation = this._location;
+        }
+
         if(game.keyboardInput.upPressed) {
             newLocation = newLocation.offset({x: ScaledNumber.from(0), y: this._maxSpeed.negate()});
         }
         if(game.keyboardInput.downPressed) {
             newLocation = newLocation.offset({x: ScaledNumber.from(0), y: this._maxSpeed});
         }
-
-        this._location = newLocation;
+        if(newLocation.y >= 0 && newLocation.y < game.FIELD_SIZE.height) {
+            this._location = newLocation;
+        }
     }
 }

@@ -4,8 +4,9 @@ class Game {
     private static readonly GAME_SPEED = 1000 / 60;
 
     public get screenBounds(): Rectangle {
-        return new Rectangle({x: 0, y: 0}, this._screenSize);
+        return new Rectangle(this._screenLocation, this._screenSize);
     }
+    private _screenLocation: Point; 
     private readonly _screenSize: Size;
 
     public get FIELD_SIZE(): Size {
@@ -35,6 +36,7 @@ class Game {
         this.keyboardInput = new KeyboardInput();
 
         this._ctx = canvas.getContext("2d");
+        this._screenLocation = {x: 0, y: 0};
         this._screenSize = {
             width: canvas.width / Game.ZOOM_FACTOR,
             height: canvas.height / Game.ZOOM_FACTOR
@@ -90,6 +92,11 @@ class Game {
         let screenBounds = this.screenBounds;
  
         this.drawables.forEach((d) => d.update(this));
+
+        this._screenLocation = {
+            x: this._player.location.x * (1 - this.screenBounds.width/this.FIELD_SIZE.width),
+            y: this._player.location.y * (1 - this.screenBounds.height/this.FIELD_SIZE.height),
+        };
 
         this.draw(this._vctx);
 

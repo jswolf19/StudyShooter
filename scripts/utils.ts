@@ -98,7 +98,7 @@ class ScaledNumber {
         this._shift = shift;
     }
 
-    public add(other: ScaledNumber): ScaledNumber {
+    public add(other: ScaledNumber | number): ScaledNumber {
         let n = this.normalize(other);
         return new ScaledNumber(n.thisValue + n.otherValue, n.shift);
     }
@@ -107,22 +107,22 @@ class ScaledNumber {
         return new ScaledNumber(-this.scaledValue, this._shift);
     }
 
-    private normalize(other: ScaledNumber): { thisValue: number, otherValue: number, shift: number } {
-        if (other._shift === this._shift) {
-            return { thisValue: this.scaledValue, otherValue: other.scaledValue, shift: this._shift };
+    private normalize(other: ScaledNumber | number): { thisValue: number, otherValue: number, shift: number } {
+        let shift: number = this._shift;
+        let thisValue: number = this.scaledValue;
+        let otherValue: number;
+        if(typeof other === "number") {
+            otherValue = other<<this._shift; 
         } else {
-            let shift: number;
-            let thisValue = this.scaledValue;
-            let otherValue = other.scaledValue;
-            if (other._shift < this._shift) {
-                shift = this._shift;
+            otherValue = other.scaledValue;
+            if (other._shift <= this._shift) {
                 otherValue = otherValue << (this._shift - other._shift);
             } else {
                 shift = other._shift;
                 thisValue = thisValue << (other._shift - this._shift);
             }
-            return { thisValue, otherValue, shift };
         }
+        return { thisValue, otherValue, shift };
     }
 
     public valueOf(): number {

@@ -99,8 +99,17 @@ class ScaledNumber {
     }
 
     public add(other: ScaledNumber): ScaledNumber {
+        let n = this.normalize(other);
+        return new ScaledNumber(n.thisValue + n.otherValue, n.shift);
+    }
+
+    public negate(): ScaledNumber {
+        return new ScaledNumber(-this.scaledValue, this._shift);
+    }
+
+    private normalize(other: ScaledNumber): { thisValue: number, otherValue: number, shift: number } {
         if (other._shift === this._shift) {
-            return new ScaledNumber(this.scaledValue + other.scaledValue, this._shift);
+            return { thisValue: this.scaledValue, otherValue: other.scaledValue, shift: this._shift };
         } else {
             let shift: number;
             let thisValue = this.scaledValue;
@@ -112,12 +121,8 @@ class ScaledNumber {
                 shift = other._shift;
                 thisValue = thisValue << (other._shift - this._shift);
             }
-            return new ScaledNumber(thisValue + otherValue, shift);
+            return { thisValue, otherValue, shift };
         }
-    }
-
-    public negate(): ScaledNumber {
-        return new ScaledNumber(-this.scaledValue, this._shift);
     }
 
     public valueOf(): number {

@@ -107,6 +107,17 @@ class ScaledNumber {
         return new ScaledNumber(-this.scaledValue, this._shift);
     }
 
+    public compareTo(other: ScaledNumber | number): -1 | 0 | 1 {
+        let n = this.normalize(other);
+        if(n.thisValue < n.otherValue) {
+            return -1;
+        } else if(n.thisValue > n.otherValue) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
     private normalize(other: ScaledNumber | number): { thisValue: number, otherValue: number, shift: number } {
         let shift: number = this._shift;
         let thisValue: number = this.scaledValue;

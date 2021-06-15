@@ -12,6 +12,8 @@ spaceshipSprites.png 作成者: [arbois](https://www.deviantart.com/arboris/art/
 
 - [Video3](https://github.com/jswolf19/StudyShooter/releases/tag/Video3) スプライト追加: [シューティングゲーム作成(3)](https://www.youtube.com/watch?v=pgEd6GIw1fQ&list=PLa3BDwShqOrT0NPZ16UxY-w_NJ4erbSbV&index=3)
 
+- [Video4](https://github.com/jswolf19/StudyShooter/releases/tag/Video4) プレイヤー追加、動き対応: [シューティングゲーム作成(3)](https://www.youtube.com/watch?v=pgEd6GIw1fQ&list=PLa3BDwShqOrT0NPZ16UxY-w_NJ4erbSbV&index=4)
+
 ## 開発環境
 npm/node v6.4.1/10.15.3
 

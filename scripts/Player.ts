@@ -93,5 +93,17 @@ class Player implements Drawable {
         if(newLocation.y >= 0 && newLocation.y < game.FIELD_SIZE.height) {
             this._location = newLocation;
         }
+
+        if(game.keyboardInput.shootPressed) {
+            this.addProjectiles(game);
+        }
+    }
+
+    private addProjectiles(game: Game): void {
+        game.addDrawable(new Projectile(
+            game.spriteLoader.getSprite(Rectangle.from({ x: 101, y: 10},　{x: 104, y: 16})),
+            this._location,
+            { x: ScaledNumber.from(0), y: ScaledNumber.from(-10)}
+        ));
     }
 }

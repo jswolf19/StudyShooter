@@ -18,6 +18,9 @@ class Game {
 
     public readonly keyboardInput: KeyboardInput;
 
+    public get spriteLoader(): SpriteLoader {
+        return this._sprites;
+    }
     private readonly _sprites: SpriteLoader;
     private readonly _ctx: CanvasRenderingContext2D;
 

@@ -26,9 +26,15 @@ class Game {
     private _loopHandle: number;
 
     private get drawables(): Array<Drawable> {
-        return (this._stars as Array<Drawable>).concat(this._player);
+        return (this._stars as Array<Drawable>).concat(this._otherDrawables);
     }
     private readonly _stars: Array<Star>;
+    private readonly _otherDrawables: Array<Drawable>;
+
+    public addDrawable(drawable: Drawable): void {
+        this._otherDrawables.push(drawable);
+    }
+
     private readonly _player: Player;
 
     public constructor(canvas: HTMLCanvasElement, sprites: SpriteLoader) {
@@ -49,6 +55,8 @@ class Game {
             ScaledNumber.from(this.screenBounds.height/2)
         ), this._sprites);
 
+        this._otherDrawables = [];
+
         this._vcanvas = document.createElement("canvas");
         this._vcanvas.width = this._screenSize.width * 2;
         this._vcanvas.height = this._screenSize.height * 2;
@@ -65,6 +73,8 @@ class Game {
         }
 
         this.keyboardInput.register(document);
+
+        this.addDrawable(this._player);
 
         this._sprites.registerLoadHandler(() => this.startInternal());
     }

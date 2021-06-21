@@ -15,6 +15,10 @@ class KeyboardInput {
         return this.isKeyPressed("ArrowDown");
     }
 
+    public get shootPressed(): boolean {
+        return this.isKeyPressed("Space");
+    }
+
     private isKeyPressed(key: string): boolean {
         return typeof this._keyStates[key] !== "undefined";
     }
@@ -39,11 +43,15 @@ class KeyboardInput {
     }
 
     private keydownHandler(e: KeyboardEvent): void {
+        if(!e.repeat) {
+            console.log(`keydown '${e.key}' (${e.code})`);
+        }
         this._keyStates[e.code] = true;
     }
     private readonly _boundKeydownHandler;
 
     private keyupHandler(e: KeyboardEvent): void {
+        console.log(`keyup '${e.key}' (${e.code})`);
         delete this._keyStates[e.code];
     }
     private readonly _boundKeyupHandler;

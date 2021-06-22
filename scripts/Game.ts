@@ -29,13 +29,13 @@ class Game {
     private _loopHandle: number;
 
     public get drawables(): Array<Drawable> {
-        return (this._stars as Array<Drawable>).concat(this._otherDrawables);
+        return (this._stars as Array<Drawable>).concat(...this._otherDrawables);
     }
     private readonly _stars: Array<Star>;
-    private readonly _otherDrawables: Array<Drawable>;
+    private readonly _otherDrawables: Set<Drawable>;
 
     public addDrawable(drawable: Drawable): void {
-        this._otherDrawables.push(drawable);
+        this._otherDrawables.add(drawable);
     }
 
     private readonly _player: Player;
@@ -58,7 +58,7 @@ class Game {
             ScaledNumber.from(this.screenBounds.height/2)
         ), this._sprites);
 
-        this._otherDrawables = [];
+        this._otherDrawables = new Set();
 
         this._vcanvas = document.createElement("canvas");
         this._vcanvas.width = this._screenSize.width * 2;

@@ -1,7 +1,7 @@
 class Game {
     private static readonly ZOOM_FACTOR: number = 2;
     private static readonly STAR_CNT = 300;
-    private static readonly GAME_SPEED = 1000 / 60;
+    private static readonly GAME_SPEED = 1000 / 64;
 
     public get screenBounds(): Rectangle {
         return new Rectangle(this._screenLocation, this._screenSize);

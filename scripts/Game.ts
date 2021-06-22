@@ -38,6 +38,10 @@ class Game {
         this._otherDrawables.add(drawable);
     }
 
+    public deleteDrawable(drawable: Drawable): void {
+        this._otherDrawables.delete(drawable);
+    }
+
     private readonly _player: Player;
 
     public constructor(canvas: HTMLCanvasElement, sprites: SpriteLoader) {

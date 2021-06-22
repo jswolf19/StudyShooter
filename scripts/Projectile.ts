@@ -18,6 +18,11 @@ class Projectile implements Drawable {
     }
 
     update(game: Game): void {
+        let fieldBounds = new Rectangle({x: 0, y: 0}, game.FIELD_SIZE);
         this._location = this._location.offset(this._speed);
+
+        if(!fieldBounds.hasOverlap(this._sprite.getBoundsCenteredAt(this._location))) {
+            game.deleteDrawable(this);
+        }
     }
 }

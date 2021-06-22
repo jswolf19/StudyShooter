@@ -28,7 +28,7 @@ class Game {
     private readonly _vctx: CanvasRenderingContext2D;
     private _loopHandle: number;
 
-    private get drawables(): Array<Drawable> {
+    public get drawables(): Array<Drawable> {
         return (this._stars as Array<Drawable>).concat(this._otherDrawables);
     }
     private readonly _stars: Array<Star>;

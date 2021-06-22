@@ -89,16 +89,7 @@ class Game {
     }
 
     public isVisible(test: Point | Rectangle): boolean {
-        let screenBounds = this.screenBounds;
-        let testBounds: Rectangle = Game.isRectangle(test) ? test : new Rectangle(test, {width: 0, height: 0});
-
-        return testBounds.left < screenBounds.right &&
-                testBounds.right > screenBounds.left && 
-                testBounds.top < screenBounds.bottom &&
-                testBounds.bottom > screenBounds.top; 
-    }
-    private static isRectangle(obj: Point | Rectangle): obj is Rectangle {
-        return typeof (obj as Rectangle).width !== "undefined";
+        return this.screenBounds.hasOverlap(test); 
     }
 
     private gameLoop(): void {

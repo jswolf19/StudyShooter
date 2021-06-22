@@ -5,8 +5,18 @@ class DebugPanel implements Drawable {
         return this._game.drawables.filter((d) => d instanceof Projectile).length;
     }
 
+    public get fps(): number {
+        return this._fps;
+    }
+    private _fps: number = 0;
+    private _fpsCnt: number = 0;
+    private _fpsStartTime: Date = new Date();
+
     private get lines(): Array<string> {
-        return [`Bullets: ${this.projectileCount}`];
+        return [
+            `FPS: ${this._fps}`,
+            `Bullets: ${this.projectileCount}`
+        ];
     }
 
     private _visible: boolean;
@@ -36,5 +46,13 @@ class DebugPanel implements Drawable {
     }
 
     update(game: Game): void {
+        this._fpsCnt++;
+        let fpsElapsed = Date.now() - this._fpsStartTime.getTime();
+
+        if(fpsElapsed >= 400) {
+            this._fps = Math.round(this._fpsCnt * 100000 / fpsElapsed)/100;
+            this._fpsCnt = 0;
+            this._fpsStartTime = new Date(this._fpsStartTime.getTime() + fpsElapsed);
+        }
     }
 }

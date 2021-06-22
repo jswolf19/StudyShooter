@@ -11,11 +11,15 @@
         <script src="scripts/Projectile.js"></script>
         <script src="scripts/Player.js"></script>
         <script src="scripts/Game.js"></script>
+        <script src="scripts/DebugPanel.js"></script>
         <script>
             function init() {
                 var sprites = new SpriteLoader("assets/sprites.png");
                 var game = new Game(document.getElementById("gameCanvas"), sprites);
                 game.start();
+
+                var dbg = new DebugPanel(game)
+                dbg.show();
             }
         </script>
     </head>

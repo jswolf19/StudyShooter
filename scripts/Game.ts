@@ -1,7 +1,7 @@
 class Game {
     private static readonly ZOOM_FACTOR: number = 2;
     private static readonly STAR_CNT = 300;
-    private static readonly GAME_SPEED = 1000 / 60;
+    private static readonly GAME_SPEED = 1000 / 64;
 
     public get screenBounds(): Rectangle {
         return new Rectangle(this._screenLocation, this._screenSize);
@@ -18,6 +18,9 @@ class Game {
 
     public readonly keyboardInput: KeyboardInput;
 
+    public get spriteLoader(): SpriteLoader {
+        return this._sprites;
+    }
     private readonly _sprites: SpriteLoader;
     private readonly _ctx: CanvasRenderingContext2D;
 
@@ -25,10 +28,20 @@ class Game {
     private readonly _vctx: CanvasRenderingContext2D;
     private _loopHandle: number;
 
-    private get drawables(): Array<Drawable> {
-        return (this._stars as Array<Drawable>).concat(this._player);
+    public get drawables(): Array<Drawable> {
+        return (this._stars as Array<Drawable>).concat(...this._otherDrawables);
     }
     private readonly _stars: Array<Star>;
+    private readonly _otherDrawables: Set<Drawable>;
+
+    public addDrawable(drawable: Drawable): void {
+        this._otherDrawables.add(drawable);
+    }
+
+    public deleteDrawable(drawable: Drawable): void {
+        this._otherDrawables.delete(drawable);
+    }
+
     private readonly _player: Player;
 
     public constructor(canvas: HTMLCanvasElement, sprites: SpriteLoader) {
@@ -49,6 +62,8 @@ class Game {
             ScaledNumber.from(this.screenBounds.height/2)
         ), this._sprites);
 
+        this._otherDrawables = new Set();
+
         this._vcanvas = document.createElement("canvas");
         this._vcanvas.width = this._screenSize.width * 2;
         this._vcanvas.height = this._screenSize.height * 2;
@@ -66,6 +81,8 @@ class Game {
 
         this.keyboardInput.register(document);
 
+        this.addDrawable(this._player);
+
         this._sprites.registerLoadHandler(() => this.startInternal());
     }
 
@@ -76,16 +93,7 @@ class Game {
     }
 
     public isVisible(test: Point | Rectangle): boolean {
-        let screenBounds = this.screenBounds;
-        let testBounds: Rectangle = Game.isRectangle(test) ? test : new Rectangle(test, {width: 0, height: 0});
-
-        return testBounds.left < screenBounds.right &&
-                testBounds.right > screenBounds.left && 
-                testBounds.top < screenBounds.bottom &&
-                testBounds.bottom > screenBounds.top; 
-    }
-    private static isRectangle(obj: Point | Rectangle): obj is Rectangle {
-        return typeof (obj as Rectangle).width !== "undefined";
+        return this.screenBounds.hasOverlap(test); 
     }
 
     private gameLoop(): void {

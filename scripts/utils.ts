@@ -48,6 +48,15 @@ class Rectangle {
         this._location = location;
         this._size = size;
     }
+
+    public hasOverlap(test: Point | Rectangle): boolean {
+        let testBounds: Rectangle = test instanceof Rectangle ? test : new Rectangle(test, {width: 0, height: 0});
+
+        return testBounds.left < this.right &&
+                testBounds.right > this.left && 
+                testBounds.top < this.bottom &&
+                testBounds.bottom > this.top; 
+    }
 }
 
 class ScaledPoint implements Point {

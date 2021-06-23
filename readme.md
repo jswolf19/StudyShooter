@@ -16,6 +16,8 @@ wwwroot/assets/sprites.png (adapted from above) ([Creative Commons Attribution-S
 
 - [Video4](https://github.com/jswolf19/StudyShooter/releases/tag/Video4) プレイヤー追加、動き対応: [シューティングゲーム作成(4)](https://www.youtube.com/watch?v=88voLXjOaHs&list=PLa3BDwShqOrT0NPZ16UxY-w_NJ4erbSbV&index=4)
 
+- [Video5](https://github.com/jswolf19/StudyShooter/releases/tag/Video5) 弾打ち、デバッグパネル: [シューティングゲーム作成(5)](https://www.youtube.com/watch?v=DA8IsiscQ9Q&list=PLa3BDwShqOrT0NPZ16UxY-w_NJ4erbSbV&index=5)
+
 ## 開発環境
 npm/node v6.4.1/10.15.3
 

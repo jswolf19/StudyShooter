@@ -7,6 +7,8 @@ TypeScriptでシューティングゲームを作成する。
 originalAssets/spaceshipSprites.png 作成者: [arbois](https://www.deviantart.com/arboris/art/Spaceship-sprites-43030167) ([Creative Commons Attribution-Share Alike 3.0 License](https://creativecommons.org/licenses/by-sa/3.0/))  
 wwwroot/assets/sprites.png (adapted from above) ([Creative Commons Attribution-Share Alike 3.0 License](https://creativecommons.org/licenses/by-sa/3.0/))
 
+originalAssets/32x32-bat-sprite.png 作成者: [bagzie](https://opengameart.org/content/bat-sprite) ([OGA-BY 3.0](https://static.opengameart.org/OGA-BY-3.0.txt))
+
 ## 一覧
 - [Video1](https://github.com/jswolf19/StudyShooter/releases/tag/Video1) 環境構築、背景の表示: [シューティングゲーム作成(1)](https://www.youtube.com/watch?v=ZQYgH_JTyKU&list=PLa3BDwShqOrT0NPZ16UxY-w_NJ4erbSbV) (`Star.update`がまだ使用されていないため、一時的に省略)
 

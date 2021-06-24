@@ -5,7 +5,7 @@ class Player implements Drawable {
     private _location: ScaledPoint;
     private _maxSpeed: ScaledNumber;
 
-    private _weapon = new FourShot();
+    private _weapon: Weapon = new FourShot();
 
     private get sprite(): Sprite {
         return this._sprites[this._currentSpriteIdx.valueOf()];
@@ -96,6 +96,13 @@ class Player implements Drawable {
             this._location = newLocation;
         }
 
+        if(game.keyboardInput.changeWeaponPressed) {
+            if(this._weapon instanceof TwoShot) {
+                this._weapon = new FourShot();
+            } else {
+                this._weapon = new TwoShot();
+            }
+        }
         this._weapon.update(game, this._location, game.keyboardInput.shootPressed);
     }
 }

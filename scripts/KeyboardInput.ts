@@ -15,6 +15,10 @@ class KeyboardInput {
         return this.isKeyPressed("ArrowDown");
     }
 
+    public get changeWeaponPressed(): boolean {
+        return this.isKeyPressed("ControlLeft");
+    }
+
     public get shootPressed(): boolean {
         return this.isKeyPressed("Space");
     }

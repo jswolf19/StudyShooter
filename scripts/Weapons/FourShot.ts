@@ -1,4 +1,4 @@
-class FourShot {
+class FourShot implements Weapon {
     private readonly _shootCooldownFrames = 4;
     private _cooldownCounter: number = 0;
     private readonly _maxAmmo = 4;

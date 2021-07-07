@@ -2,8 +2,8 @@ class Enemy implements Drawable {
     private readonly _sprite: Sprite;
     private _location: ScaledPoint;
 
-    public constructor(spriteLoader: SpriteLoader, location: ScaledPoint) {
-        this._sprite = spriteLoader.getSprite(1, Rectangle.from({ x: 32, y: 0},　{x: 63, y: 31}));
+    public constructor(sprite: Sprite, location: ScaledPoint) {
+        this._sprite = sprite;
         this._location = location;
     }
 

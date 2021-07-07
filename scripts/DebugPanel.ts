@@ -5,6 +5,10 @@ class DebugPanel implements Drawable {
         return this._game.drawables.filter((d) => d instanceof Projectile).length;
     }
 
+    public get enemyCount(): number {
+        return this._game.drawables.filter((d) => d instanceof Enemy).length;
+    }
+
     public get fps(): number {
         return this._fps;
     }
@@ -15,7 +19,8 @@ class DebugPanel implements Drawable {
     private get lines(): Array<string> {
         return [
             `FPS: ${this._fps}`,
-            `Bullets: ${this.projectileCount}`
+            `Bullets: ${this.projectileCount}`,
+            `Enemies: ${this.enemyCount}`
         ];
     }
 

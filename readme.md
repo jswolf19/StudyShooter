@@ -20,6 +20,8 @@ originalAssets/32x32-bat-sprite.png 作成者: [bagzie](https://opengameart.org/
 
 - [Video5](https://github.com/jswolf19/StudyShooter/releases/tag/Video5) 弾打ち、デバッグパネル: [シューティングゲーム作成(5)](https://www.youtube.com/watch?v=DA8IsiscQ9Q&list=PLa3BDwShqOrT0NPZ16UxY-w_NJ4erbSbV&index=5)
 
+- [Video6](https://github.com/jswolf19/StudyShooter/releases/tag/Video6) 敵追加その１: [シューティングゲーム作成(6)](https://www.youtube.com/watch?v=JmEAPeXpwC0&list=PLa3BDwShqOrT0NPZ16UxY-w_NJ4erbSbV&index=6)
+
 ## 開発環境
 npm/node v6.4.1/10.15.3
 

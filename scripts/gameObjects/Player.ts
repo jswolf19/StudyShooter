@@ -57,9 +57,9 @@ class Player implements Drawable {
         this._maxSpeed = ScaledNumber.from(2);
 
         this._sprites = [
-            spriteLoader.getSprite(Rectangle.from({x: 0, y: 0}, {x: 29, y: 35})),
-            spriteLoader.getSprite(Rectangle.from({x: 31, y: 0}, {x: 69, y: 35})),
-            spriteLoader.getSprite(Rectangle.from({x: 71, y: 0}, {x: 99, y: 35})),
+            spriteLoader.getSprite(0, Rectangle.from({x: 0, y: 0}, {x: 29, y: 35})),
+            spriteLoader.getSprite(0, Rectangle.from({x: 31, y: 0}, {x: 69, y: 35})),
+            spriteLoader.getSprite(0, Rectangle.from({x: 71, y: 0}, {x: 99, y: 35})),
         ];
         this._spriteRestState = new ScaledNumber(3<<1, 2);
         this._currentSpriteIdx = this._spriteRestState;
@@ -120,22 +120,22 @@ class Player implements Drawable {
 
     private addProjectiles(game: Game): void {
         game.addDrawable(new Projectile(
-            game.spriteLoader.getSprite(Rectangle.from({ x: 101, y: 0},　{x: 104, y: 8})),
+            game.spriteLoader.getSprite(0, Rectangle.from({ x: 101, y: 0},　{x: 104, y: 8})),
             this._location.offset({x: ScaledNumber.from(-10), y: ScaledNumber.from(-4)}),
             { x: new ScaledNumber(-1, 2), y: ScaledNumber.from(-8)}
         ));
         game.addDrawable(new Projectile(
-            game.spriteLoader.getSprite(Rectangle.from({ x: 101, y: 10},　{x: 104, y: 16})),
+            game.spriteLoader.getSprite(0, Rectangle.from({ x: 101, y: 10},　{x: 104, y: 16})),
             this._location.offset({x: ScaledNumber.from(-4), y: ScaledNumber.from(-10)}),
             { x: ScaledNumber.from(0), y: ScaledNumber.from(-8)}
         ));
         game.addDrawable(new Projectile(
-            game.spriteLoader.getSprite(Rectangle.from({ x: 101, y: 10},　{x: 104, y: 16})),
+            game.spriteLoader.getSprite(0, Rectangle.from({ x: 101, y: 10},　{x: 104, y: 16})),
             this._location.offset({x: ScaledNumber.from(4), y: ScaledNumber.from(-10)}),
             { x: ScaledNumber.from(0), y: ScaledNumber.from(-8)}
         ));
         game.addDrawable(new Projectile(
-            game.spriteLoader.getSprite(Rectangle.from({ x: 101, y: 0},　{x: 104, y: 8})),
+            game.spriteLoader.getSprite(0, Rectangle.from({ x: 101, y: 0},　{x: 104, y: 8})),
             this._location.offset({x: ScaledNumber.from(10), y: ScaledNumber.from(-4)}),
             { x: new ScaledNumber(1, 2), y: ScaledNumber.from(-8)}
         ));

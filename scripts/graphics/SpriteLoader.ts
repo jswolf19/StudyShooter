@@ -1,45 +1,55 @@
 class SpriteLoader {
-    private readonly _sprites: HTMLImageElement;
+    private readonly _sprites: Array<HTMLImageElement>;
 
     public get Loaded(): boolean {
-        return this._sprites.complete;
+        return this._sprites.reduce((acc, s) => acc && s.complete, true);
     }
 
-    public get Error(): Error {
-        return this._err;
-    }
-    private _err: Error;
+    private _loadHandlers: Array<(this: SpriteLoader, ev: Event) => void>;
 
-    public constructor(url: string) {
-        this._err = null;
-        this._sprites = new Image();
-        this._sprites.onerror = (e, source, lineno, colno, error) => this._err = error || new Error("error");
-        this._sprites.src = url;
+    public get Errors(): Array<Error> {
+        return this._errs;
+    }
+    private _errs: Array<Error>;
+
+    public constructor(urls: Array<string>) {
+        this._errs = [];
+        this._loadHandlers = [];
+
+        this._sprites = urls.map((url) => {
+            let ret  = new Image();
+            ret.onerror = (e, source, lineno, colno, error) => this._errs.push(error || new Error("error"));
+            ret.onload = (e) => this.handleLoad();
+            ret.src = url;
+
+            return ret;
+        });
     }
 
-    public getSprite(rect: Rectangle): Sprite {
-        return new Sprite(this._sprites, rect);
+    public getSprite(group: number, rect: Rectangle): Sprite {
+        return new Sprite(this._sprites[group], rect);
     }
 
-    public registerLoadHandler(handler: (this: GlobalEventHandlers, ev: Event) => void): void {
-        if(this.Error !== null) {
-            throw this.Error;
+    public registerLoadHandler(handler: (this: SpriteLoader, ev: Event) => void): void {
+        if(this.Errors.length !== 0) {
+            throw this.Errors[0];
         }
 
         if(this.Loaded) {
-            handler.call(this._sprites, new Event("onload"));
+            this.onload(handler);
         } else {
-            let loadHandler: (this: GlobalEventHandlers, ev: Event) => void;
-            if(!this._sprites.onload) {
-                loadHandler = handler;
-            } else {
-                let curHandler: (this: GlobalEventHandlers, ev: Event) => void = this._sprites.onload;
-                loadHandler = function(ev) {
-                    curHandler.call(this, ev);
-                    handler.call(this, ev);
-                } 
-            }
-            this._sprites.onload = loadHandler;
+            this._loadHandlers.push(handler);
+        }
+    }
+
+    private onload(handler: (this: SpriteLoader, ev: Event) => void): void {
+        handler.call(this, new Event("onload"));
+    }
+
+    private handleLoad(): void {
+        if(this.Loaded) {
+            this._loadHandlers.forEach((h) => this.onload(h));
+            this._loadHandlers = [];
         }
     }
 }

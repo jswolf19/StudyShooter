@@ -10,11 +10,12 @@
         <script src="scripts/graphics/Star.js"></script>
         <script src="scripts/gameObjects/Projectile.js"></script>
         <script src="scripts/gameObjects/Player.js"></script>
+        <script src="scripts/gameObjects/Enemy.js"></script>
         <script src="scripts/Game.js"></script>
         <script src="scripts/DebugPanel.js"></script>
         <script>
             function init() {
-                var sprites = new SpriteLoader(["assets/sprites.png"]);
+                var sprites = new SpriteLoader(["assets/sprites.png", "assets/enemySprite1.png"]);
                 var game = new Game(document.getElementById("gameCanvas"), sprites);
                 game.start();
 

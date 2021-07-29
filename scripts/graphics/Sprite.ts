@@ -1,4 +1,9 @@
-class Sprite {
+interface Sprite {
+    getBoundsCenteredAt(location: Point): Rectangle;
+    draw(ctx: CanvasDrawImage, location: Point): void;
+}
+
+class BaseSprite implements Sprite {
     private readonly _bounds: Rectangle;
 
     private readonly _image: HTMLImageElement;
@@ -10,7 +15,7 @@ class Sprite {
 
     public getBoundsCenteredAt(location: Point): Rectangle {
         let topLeft: Point;
-        if(Sprite.isScaledPoint(location)) {
+        if(BaseSprite.isScaledPoint(location)) {
             topLeft = location.offset({
                 x: new ScaledNumber(-this._bounds.width, 1),
                 y: new ScaledNumber(-this._bounds.height, 1)

@@ -26,12 +26,12 @@ class TwoShot implements Weapon {
 
     private addProjectiles(game: Game, shipLocation: ScaledPoint): void {
         game.addDrawable(new Projectile(
-            game.spriteLoader.getSprite(Rectangle.from({ x: 101, y: 10},　{x: 104, y: 16})),
+            new ReversedSprite(game.spriteLoader.getSprite(Rectangle.from({ x: 101, y: 10},　{x: 104, y: 16}))),
             shipLocation.offset({x: ScaledNumber.from(-4), y: ScaledNumber.from(15)}),
             { x: ScaledNumber.from(0), y: ScaledNumber.from(8)}
         ));
         game.addDrawable(new Projectile(
-            game.spriteLoader.getSprite(Rectangle.from({ x: 101, y: 10},　{x: 104, y: 16})),
+            new ReversedSprite(game.spriteLoader.getSprite(Rectangle.from({ x: 101, y: 10},　{x: 104, y: 16}))),
             shipLocation.offset({x: ScaledNumber.from(4), y: ScaledNumber.from(15)}),
             { x: ScaledNumber.from(0), y: ScaledNumber.from(8)}
         ));

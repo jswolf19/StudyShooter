@@ -5,12 +5,7 @@ class Player implements Drawable {
     private _location: ScaledPoint;
     private _maxSpeed: ScaledNumber;
 
-    private readonly _shootCooldownFrames = 4;
-    private _cooldownCounter: number = 0;
-    private readonly _maxAmmo = 4;
-    private _curAmmo: number = this._maxAmmo;
-    private readonly _reloadFrames = 20;
-    private _reloadCounter: number = 0;
+    private _weapon: Weapon = new FourShot();
 
     private get sprite(): Sprite {
         return this._sprites[this._currentSpriteIdx.valueOf()];
@@ -101,43 +96,13 @@ class Player implements Drawable {
             this._location = newLocation;
         }
 
-        if(game.keyboardInput.shootPressed && this._cooldownCounter === 0 && this._curAmmo > 0) {
-            this.addProjectiles(game);
-            this._curAmmo--;
-            this._cooldownCounter = this._shootCooldownFrames;
-            this._reloadCounter = this._reloadFrames;
-        } else {
-            if(this._cooldownCounter > 0) {
-                this._cooldownCounter--;
-            }
-            if(this._reloadCounter === 0) {
-                this._curAmmo = this._maxAmmo;
-            } else if(this._reloadCounter > 0) {
-                this._reloadCounter--;
+        if(game.keyboardInput.changeWeaponPressed) {
+            if(this._weapon instanceof TwoShot) {
+                this._weapon = new FourShot();
+            } else {
+                this._weapon = new TwoShot();
             }
         }
-    }
-
-    private addProjectiles(game: Game): void {
-        game.addDrawable(new Projectile(
-            game.spriteLoader.getSprite(0, Rectangle.from({ x: 101, y: 0},　{x: 104, y: 8})),
-            this._location.offset({x: ScaledNumber.from(-10), y: ScaledNumber.from(-4)}),
-            { x: new ScaledNumber(-1, 2), y: ScaledNumber.from(-8)}
-        ));
-        game.addDrawable(new Projectile(
-            game.spriteLoader.getSprite(0, Rectangle.from({ x: 101, y: 10},　{x: 104, y: 16})),
-            this._location.offset({x: ScaledNumber.from(-4), y: ScaledNumber.from(-10)}),
-            { x: ScaledNumber.from(0), y: ScaledNumber.from(-8)}
-        ));
-        game.addDrawable(new Projectile(
-            game.spriteLoader.getSprite(0, Rectangle.from({ x: 101, y: 10},　{x: 104, y: 16})),
-            this._location.offset({x: ScaledNumber.from(4), y: ScaledNumber.from(-10)}),
-            { x: ScaledNumber.from(0), y: ScaledNumber.from(-8)}
-        ));
-        game.addDrawable(new Projectile(
-            game.spriteLoader.getSprite(0, Rectangle.from({ x: 101, y: 0},　{x: 104, y: 8})),
-            this._location.offset({x: ScaledNumber.from(10), y: ScaledNumber.from(-4)}),
-            { x: new ScaledNumber(1, 2), y: ScaledNumber.from(-8)}
-        ));
+        this._weapon.update(game, this._location, game.keyboardInput.shootPressed);
     }
 }

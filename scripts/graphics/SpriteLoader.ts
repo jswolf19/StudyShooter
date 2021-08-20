@@ -27,7 +27,7 @@ class SpriteLoader {
     }
 
     public getSprite(group: number, rect: Rectangle): Sprite {
-        return new Sprite(this._sprites[group], rect);
+        return new BaseSprite(this._sprites[group], rect);
     }
 
     public registerLoadHandler(handler: (this: SpriteLoader, ev: Event) => void): void {
